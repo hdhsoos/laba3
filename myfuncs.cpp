@@ -13,7 +13,7 @@ void table(float a[], float b[], int x) {
     ofstream fout("3labaout.txt");
     for (i; i < 20; i++) {
         for (j = 0; j < 10; j++) {
-            c[i][j] = a[j] / (1 + abs(b[i]));
+            c[i][j] = a[j] / (1 + b[i]);
             if (x == 1) {
                 cout << c[i][j] << " ";
             }
@@ -40,10 +40,10 @@ void fail() {
     else {
         int i{};
         float a[10], b[20];
-        for (i; i < 10; i++) {
+        for (i=0; i < 10; i++) {
             fin >> a[i];
         }
-        for (i; i < 20; i++) {
+        for (i=0; i < 20; i++) {
             fin >> b[i];
         }
         table(a, b, x);
@@ -75,11 +75,11 @@ void cons() {
     cout << "Хорошо, вводите данные. Для начала введите числа a." << endl;
     int i{};
     float a[10], b[20];
-    for (i; i < 10; i++) {
+    for (i=0; i < 10; i++) {
         cin >> a[i];
     }
     cout << "Теперь введите числа b." << endl;
-    for (i; i < 20; i++) {
+    for (i=0; i < 20; i++) {
         cin >> b[i];
     }
     table(a, b,x);
