@@ -13,7 +13,7 @@ void table(float a[], float b[], int x) {
     ofstream fout("3labaout.txt");
     for (i; i < 20; i++) {
         for (j = 0; j < 10; j++) {
-            c[i][j] = a[j] / (1 + b[i]);
+            c[i][j] = a[j] / (1 + abs(b[i]));
             if (x == 1) {
                 cout << c[i][j] << " ";
             }
