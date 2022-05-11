@@ -4,15 +4,17 @@
 
 using namespace std;
 
-void table(float a[], float b[], int x) {
-    float c[20][10];
+void table(int n, int m, float a[], float b[], int x) {
+    float** c = new float* [m];
+    for (int i = 0; i < m; i++)
+        c[i] = new float[n];
     int i{}, j{};
     if (x == 1) {
         cout << "Результат:" << endl;
     }
     ofstream fout("3labaout.txt");
-    for (i; i < 20; i++) {
-        for (j = 0; j < 10; j++) {
+    for (i; i < m; i++) {
+        for (j = 0; j < n; j++) {
             c[i][j] = a[j] / (1 + abs(b[i]));
             if (x == 1) {
                 cout << c[i][j] << " ";
@@ -28,7 +30,7 @@ void table(float a[], float b[], int x) {
             fout << endl;
         }
     }
-}
+}   
 
 void fail() {
     int x;
@@ -39,14 +41,20 @@ void fail() {
         cout << "Файл невозможно открыть. Завершаю работу." << endl;
     else {
         int i{};
-        float a[10], b[20];
-        for (i=0; i < 10; i++) {
+        int n{}, m{}; // 10, 20
+        fin >> n;
+        fin >> m;
+        float* a{};
+        a = new float[n];
+        float* b{};
+        b = new float[m];
+        for (i=0; i < n; i++) {
             fin >> a[i];
         }
-        for (i=0; i < 20; i++) {
+        for (i=0; i < m; i++) {
             fin >> b[i];
         }
-        table(a, b, x);
+        table(n, m, a, b, x);
     }
 }
 
@@ -55,7 +63,7 @@ int end_cons() {
     char a[256]{};
     cin >> a;
     if (a[0] == '1') {
-        cons();
+        start();
     }
     else {
         if (a[0] == '0') {
@@ -72,17 +80,24 @@ int end_cons() {
 void cons() {
     int x;
     x = vivod();
-    cout << "Хорошо, вводите данные. Для начала введите числа a." << endl;
+    cout << "Хорошо, вводите данные. Для начала введите числа n и m через пробел. n - количество чисел a, m - количество чисел b." << endl;
+    int n{}, m{}; // 10, 20
+    cin >> n;
+    cin >> m;
+    float* a{};
+    a = new float[n];
+    float* b{};
+    b = new float[m];
     int i{};
-    float a[10], b[20];
-    for (i=0; i < 10; i++) {
+    cout << "Введите числа a." << endl;
+    for (i=0; i < n; i++) {
         cin >> a[i];
     }
     cout << "Теперь введите числа b." << endl;
-    for (i=0; i < 20; i++) {
+    for (i=0; i < m; i++) {
         cin >> b[i];
     }
-    table(a, b,x);
+    table(n, m, a, b, x);
     end_cons();
 }
 
@@ -102,6 +117,26 @@ int vivod() {
         else {
             cout << "Ошибка ввода. Попробуйте снова." << endl;
             vivod();
+        }
+    }
+}
+
+void start() {
+    setlocale(LC_ALL, "rus");
+    cout << "Вы хотите ввести данные из файла или из консоли?" << endl;
+    cout << "0 - из файла, 1 - из консоли." << endl;
+    char a[256]{};
+    cin >> a;
+    if (a[0] == '1') {
+        cons();
+    }
+    else {
+        if (a[0] == '0') {
+            fail();
+        }
+        else {
+            cout << "Ошибка ввода. Попробуйте снова." << endl;
+            start();
         }
     }
 }

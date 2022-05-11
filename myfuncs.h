@@ -6,5 +6,6 @@ void fail();
 void cons();
 int end_cons();
 int vivod();
+void start();
 
 #endif
